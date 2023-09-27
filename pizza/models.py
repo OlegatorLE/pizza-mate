@@ -1,3 +1,6 @@
+from typing import Union
+
+from _decimal import Decimal
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -10,10 +13,19 @@ class CustomUser(AbstractUser):
         return self.username
 
 
+class PizzaSize(models.Model):
+    name = models.CharField(max_length=50)
+    multiplier = models.FloatField()  # price coef.
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Pizza(models.Model):
     name = models.CharField(max_length=63)
     description = models.TextField()
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    base_price = models.DecimalField(max_digits=7, decimal_places=2)
+    size = models.ForeignKey(PizzaSize, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='pizzas/')
     user = models.ForeignKey(
         CustomUser,
@@ -21,6 +33,9 @@ class Pizza(models.Model):
         null=True,
         blank=True,
     )
+
+    def get_final_price(self) -> Union[float, Decimal]:
+        return self.base_price * self.size.multiplier
 
     def __str__(self) -> str:
         return self.name
