@@ -1,9 +1,9 @@
 from django.urls import path
 
-from pizza.views import HomePageView
+from pizza.views import PizzaListView
 
 urlpatterns = [
-    path("", HomePageView.as_view(), name="home-page"),
+    path("", PizzaListView.as_view(), name="home-page"),
 ]
 
 app_name = "pizza"
