@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from pizza.models import CustomUser, Pizza, PizzaSize
+from pizza.models import CustomUser, Pizza, PizzaSize, Ingredient
 
 
 @admin.register(CustomUser)
@@ -28,3 +28,8 @@ class PizzaAdmin(admin.ModelAdmin):
 @admin.register(PizzaSize)
 class PizzaSizeAdmin(admin.ModelAdmin):
     list_display = ("name", "multiplier",)
+
+
+@admin.register(Ingredient)
+class IngredientAdmin(admin.ModelAdmin):
+    list_display = ("name", "description")
