@@ -21,10 +21,22 @@ class PizzaSize(models.Model):
         return self.name
 
 
+class Ingredient(models.Model):
+    name = models.CharField(max_length=63)
+    description = models.TextField()
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Pizza(models.Model):
     name = models.CharField(max_length=63)
     description = models.TextField()
     base_price = models.DecimalField(max_digits=7, decimal_places=2)
+    ingredients = models.ManyToManyField(Ingredient, related_name="pizzas")
     size = models.ForeignKey(PizzaSize, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='pizzas/')
     user = models.ForeignKey(
@@ -41,24 +53,7 @@ class Pizza(models.Model):
         return self.name
 
 
-class Ingredient(models.Model):
-    name = models.CharField(max_length=63)
-    description = models.TextField()
 
-    def __str__(self) -> str:
-        return self.name
-
-
-class PizzaIngredient(models.Model):
-    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.DecimalField(max_digits=7, decimal_places=2)
-
-    class Meta:
-        unique_together = ('pizza', 'ingredient')
-
-    def __str__(self) -> str:
-        return f"{self.ingredient.name} in {self.pizza.name}"
 
 
 class Order(models.Model):
