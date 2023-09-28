@@ -1,6 +1,7 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
-from pizza.models import Ingredient, Pizza
+from pizza.models import Ingredient, Pizza, CustomUser
 
 
 class PizzaForm(forms.ModelForm):
@@ -12,3 +13,14 @@ class PizzaForm(forms.ModelForm):
     class Meta:
         model = Pizza
         fields = "__all__"
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "address",
+            "phone",
+        )
