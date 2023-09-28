@@ -22,20 +22,20 @@
 
         <h3>Price:</h3>
         {% if size == "Small" %}
-          <p>Маленька: {{ pizza.get_prices.Small }} грн</p>
+          <p>Small: {{ pizza.get_prices.Small }} UAH</p>
         {% endif %}
         {% if size == "Medium" %}
-          <p>Середня: {{ pizza.get_prices.Medium }} грн</p>
+          <p>Medium: {{ pizza.get_prices.Medium }} UAH</p>
         {% endif %}
         {% if size == "Big" %}
-          <p>Велика: {{ pizza.get_prices.Big }} грн</p>
+          <p>Big: {{ pizza.get_prices.Big }} UAH</p>
         {% endif %}
 
       </div>
 
       <!-- Права колонка: Редагування інгредієнтів -->
       <div class="col-md-4">
-        <h3>Редагувати інгредієнти:</h3>
+        <h3>Change ingredients:</h3>
 
         <form method="post" action="{% url 'pizza:update-pizza-ingredients' pizza.id %}">
           {% csrf_token %}
@@ -78,11 +78,11 @@
             </div>
           </div>
           <input type="hidden" value="{{ size }}" name="size">
-          <button type="submit" class="btn btn-primary">Оновити інгредієнти</button>
+          <button type="submit" class="btn btn-primary">Update Ingredients</button>
         </form>
 
-        <h3>Замовити</h3>
-        <button type="button" class="btn btn-success">Замовити піцу</button>
+        <h3>Order Now</h3>
+        <button type="button" class="btn btn-success">Order Pizza</button>
       </div>
     </div>
   </div>
