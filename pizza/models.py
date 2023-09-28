@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
 
 class PizzaSize(models.Model):
     name = models.CharField(max_length=50)
+    weight = models.IntegerField(default=0)
     multiplier = models.FloatField()  # price coef.
 
     def __str__(self) -> str:
@@ -35,7 +36,7 @@ class Ingredient(models.Model):
 class Pizza(models.Model):
     name = models.CharField(max_length=63)
     description = models.TextField()
-    base_price = models.DecimalField(max_digits=7, decimal_places=2)
+    base_price = models.PositiveIntegerField()
     ingredients = models.ManyToManyField(Ingredient, related_name="pizzas")
     size = models.ForeignKey(PizzaSize, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='pizzas/')
@@ -46,8 +47,11 @@ class Pizza(models.Model):
         blank=True,
     )
 
-    def get_final_price(self) -> Union[float, Decimal]:
-        return self.base_price * self.size.multiplier
+    def get_prices(self) -> dict:
+        sizes = PizzaSize.objects.all()
+        return {
+            size.name: round(self.base_price * size.multiplier) for size in sizes
+        }
 
     def __str__(self) -> str:
         return self.name

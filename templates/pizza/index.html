@@ -55,9 +55,20 @@
                 <p class="ingredients">
                   {{ pizza.description }}
                 </p>
-                <p class="price">
-                  {{ pizza.base_price }}UAH
-                </p>
+                <div class="grid-container">
+                  <p class="btn btn-primary">Small</p>
+                  <p class="price">{{ pizza.get_prices.Small }}UAH</p>
+                </div>
+                <div class="grid-container">
+                  <p class="btn btn-primary">Medium</p>
+                  <p class="price">{{ pizza.get_prices.Medium }}UAH</p>
+                </div>
+                <div class="grid-container">
+                  <p class="btn btn-primary">Big</p>
+                  <p class="price">{{ pizza.get_prices.Big }}UAH</p>
+                </div>
+
+
               </div><!-- Menu Item -->
             {% endfor %}
           </div>
