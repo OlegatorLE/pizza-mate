@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
+from pizza.forms import PizzaForm
 from pizza.models import CustomUser, Pizza, PizzaSize, Ingredient
 
 
@@ -22,7 +23,13 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Pizza)
 class PizzaAdmin(admin.ModelAdmin):
-    list_display = ("name", "base_price", "size", "user")
+    form = PizzaForm
+    list_display = ("name", "base_price", "size", "user",)
+
+    class Media:
+        css = {
+            "all": ("css/admin_style.css",)
+        }
 
 
 @admin.register(PizzaSize)
