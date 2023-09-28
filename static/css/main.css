@@ -1664,3 +1664,6 @@ section {
 .btn, .price {
     margin: 0;
 }
+.custom-btn {
+    width: 80px;
+}

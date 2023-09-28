@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-6">
+        <img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" class="img-fluid">
+        <h3>Description:</h3>
+        <p>{{ pizza.description }}</p>
+      </div>
+
+      <div class="col-md-6">
+        <h1>{{ pizza.name }}</h1>
+
+        <h3>Ingredients:</h3>
+        <ul>
+          {% for ingredient in updated_ingredients %}
+            <li>{{ ingredient.quantity }} piece of {{ ingredient.ingredient }} </li>
+          {% endfor %}
+        </ul>
+
+        <h3>Price:</h3>
+        {% if pizza_size == "Small" %}
+          <p>Small: {{ pizza.get_prices.Small }} UAH</p>
+        {% endif %}
+        {% if pizza_size == "Medium" %}
+          <p>Medium: {{ pizza.get_prices.Medium }} UAH</p>
+        {% endif %}
+        {% if pizza_size == "Big" %}
+          <p>Big: {{ pizza.get_prices.Big }} UAH</p>
+        {% endif %}
+        <button class="btn btn-secondary" onclick="history.back()">Back previous page</button>
+
+        <a href="#" class="btn btn-success">Order Pizza</a>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+        <img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" class="img-fluid">
+        <h3>Description:</h3>
+        <p>{{ pizza.description }}</p>
+      </div>
+
+      <div class="col-md-4">
+        <h1>{{ pizza.name }}</h1>
+
+        <h3>Ingredients:</h3>
+        <ul>
+          {% for ingredient in pizza.ingredients.all %}
+            <li>{{ ingredient.name }}</li>
+          {% endfor %}
+        </ul>
+
+        <h3>Price:</h3>
+        {% if size == "Small" %}
+          <p>Маленька: {{ pizza.get_prices.Small }} грн</p>
+        {% endif %}
+        {% if size == "Medium" %}
+          <p>Середня: {{ pizza.get_prices.Medium }} грн</p>
+        {% endif %}
+        {% if size == "Big" %}
+          <p>Велика: {{ pizza.get_prices.Big }} грн</p>
+        {% endif %}
+
+      </div>
+
+      <!-- Права колонка: Редагування інгредієнтів -->
+      <div class="col-md-4">
+        <h3>Редагувати інгредієнти:</h3>
+
+        <form method="post" action="{% url 'pizza:update-pizza-ingredients' pizza.id %}">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6">
+              <ul>
+                {% for ingredient in left_ingredients %}
+                  <div class="d-flex align-items-center mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}"
+                             id="ingredient{{ ingredient.id }}" name="ingredients"
+                             {% if ingredient in pizza.ingredients.all %}checked{% endif %}>
+                      <label class="form-check-label" for="ingredient{{ ingredient.id }}">
+                        {{ ingredient.name }}
+                      </label>
+                    </div>
+                    <input class="form-control form-control-sm ms-2" type="number" style="width: 50px;" min="1"
+                           name="ingredient_qty_{{ ingredient.id }}" value="1">
+                  </div>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul>
+                {% for ingredient in right_ingredients %}
+                  <div class="d-flex align-items-center mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}"
+                             id="ingredient{{ ingredient.id }}" name="ingredients"
+                             {% if ingredient in pizza.ingredients.all %}checked{% endif %}>
+                      <label class="form-check-label" for="ingredient{{ ingredient.id }}">
+                        {{ ingredient.name }}
+                      </label>
+                    </div>
+                    <input class="form-control form-control-sm ms-2" type="number" style="width: 50px;" min="1"
+                           name="ingredient_qty_{{ ingredient.id }}" value="1">
+                  </div>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <input type="hidden" value="{{ size }}" name="size">
+          <button type="submit" class="btn btn-primary">Оновити інгредієнти</button>
+        </form>
+
+        <h3>Замовити</h3>
+        <button type="button" class="btn btn-success">Замовити піцу</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
