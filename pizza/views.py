@@ -30,10 +30,12 @@ class PizzaDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['size'] = kwargs.get('size', 'small')
-        all_ingredients = Ingredient.objects.all()
-        half_length = len(all_ingredients) // 2
-        context['left_ingredients'] = all_ingredients[:half_length]
-        context['right_ingredients'] = all_ingredients[half_length:]
+        context["sauce"] = Ingredient.objects.filter(ingredient_type__name="Sauces")
+        context["cheese"] = Ingredient.objects.filter(ingredient_type__name="Cheese")
+        context["meat"] = Ingredient.objects.filter(ingredient_type__name="Meat")
+        context["fruit"] = Ingredient.objects.filter(ingredient_type__name="Fruits")
+        context["vegetable"] = Ingredient.objects.filter(ingredient_type__name="Vegetables")
+        context["edge"] = Ingredient.objects.filter(ingredient_type__name="Сheese edge")
         return context
 
 

@@ -22,9 +22,19 @@ class PizzaSize(models.Model):
         return self.name
 
 
+class IngredientType(models.Model):
+    name = models.CharField(max_length=63)
+
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=63)
     description = models.TextField()
+    ingredient_type = models.ForeignKey(
+        IngredientType,
+        on_delete=models.CASCADE,
+        related_name="ingredients",
+        null=True,
+    )
 
     class Meta:
         ordering = ["name"]
@@ -50,14 +60,12 @@ class Pizza(models.Model):
     def get_prices(self) -> dict:
         sizes = PizzaSize.objects.all()
         return {
-            size.name: round(self.base_price * size.multiplier) for size in sizes
+            size.name: round(self.base_price * size.multiplier) for size in
+            sizes
         }
 
     def __str__(self) -> str:
         return self.name
-
-
-
 
 
 class Order(models.Model):

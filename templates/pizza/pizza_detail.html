@@ -3,7 +3,6 @@
 {% block content %}
   <div class="container">
     <div class="row">
-
       <div class="col-md-4">
         <img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" class="img-fluid">
         <h3>Description:</h3>
@@ -12,8 +11,8 @@
 
       <div class="col-md-4">
         <h1>{{ pizza.name }}</h1>
-
         <h3>Ingredients:</h3>
+
         <ul>
           {% for ingredient in pizza.ingredients.all %}
             <li>{{ ingredient.name }}</li>
@@ -30,10 +29,9 @@
         {% if size == "Big" %}
           <p>Big: {{ pizza.get_prices.Big }} UAH</p>
         {% endif %}
-
       </div>
 
-      <!-- Права колонка: Редагування інгредієнтів -->
+      <!-- Right column: Editing Ingredients -->
       <div class="col-md-4">
         <h3>Change ingredients:</h3>
 
@@ -41,42 +39,64 @@
           {% csrf_token %}
           <div class="row">
             <div class="col-md-6">
-              <ul>
-                {% for ingredient in left_ingredients %}
-                  <div class="d-flex align-items-center mb-2">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}"
-                             id="ingredient{{ ingredient.id }}" name="ingredients"
-                             {% if ingredient in pizza.ingredients.all %}checked{% endif %}>
-                      <label class="form-check-label" for="ingredient{{ ingredient.id }}">
-                        {{ ingredient.name }}
-                      </label>
-                    </div>
-                    <input class="form-control form-control-sm ms-2" type="number" style="width: 50px;" min="1"
-                           name="ingredient_qty_{{ ingredient.id }}" value="1">
-                  </div>
-                {% endfor %}
-              </ul>
+              <h4>Sauces:</h4>
+              {% for ingredient in sauce %}
+                <ul>
+                  {% include "includes/ingredients_list.html" %}
+                </ul>
+              {% endfor %}
             </div>
             <div class="col-md-6">
-              <ul>
-                {% for ingredient in right_ingredients %}
-                  <div class="d-flex align-items-center mb-2">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}"
-                             id="ingredient{{ ingredient.id }}" name="ingredients"
-                             {% if ingredient in pizza.ingredients.all %}checked{% endif %}>
-                      <label class="form-check-label" for="ingredient{{ ingredient.id }}">
-                        {{ ingredient.name }}
-                      </label>
-                    </div>
-                    <input class="form-control form-control-sm ms-2" type="number" style="width: 50px;" min="1"
-                           name="ingredient_qty_{{ ingredient.id }}" value="1">
-                  </div>
-                {% endfor %}
-              </ul>
+              <h4>Vegetables:</h4>
+              {% for ingredient in vegetable %}
+                <ul>
+                  {% include "includes/ingredients_list.html" %}
+                </ul>
+              {% endfor %}
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Meat:</h4>
+              {% for ingredient in meat %}
+                <ul>
+                  {% include "includes/ingredients_list.html" %}
+                </ul>
+              {% endfor %}
+            </div>
+            <div class="col-md-6">
+              <h4>Cheese:</h4>
+              {% for ingredient in cheese %}
+                <ul>
+                  {% include "includes/ingredients_list.html" %}
+                </ul>
+              {% endfor %}
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Fruits:</h4>
+              {% for ingredient in fruit %}
+                <ul>
+                  {% include "includes/ingredients_list.html" %}
+                </ul>
+              {% endfor %}
+            </div>
+            <div class="col-md-6">
+              <h4>Cheese edge:</h4>
+              {% for ingredient in edge %}
+                <ul>
+                  {% include "includes/ingredients_list.html" %}
+                </ul>
+              {% endfor %}
+            </div>
+
+          </div>
+
+
           <input type="hidden" value="{{ size }}" name="size">
           <button type="submit" class="btn btn-primary">Update Ingredients</button>
         </form>
