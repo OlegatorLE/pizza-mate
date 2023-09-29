@@ -260,7 +260,6 @@ section {
 
 .header.sticked {
     border-color: #fff;
-    border-color: #eee;
 }
 
 .header .logo img {
@@ -357,7 +356,6 @@ section {
         left: 0;
         background-color: var(--color-primary);
         visibility: hidden;
-        width: 0px;
         transition: all 0.3s ease-in-out 0s;
     }
 
@@ -386,7 +384,7 @@ section {
         opacity: 0;
         visibility: hidden;
         background: #fff;
-        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+        box-shadow: 0 0 30px rgba(127, 137, 161, 0.25);
         transition: 0.3s;
         border-radius: 4px;
     }
@@ -583,7 +581,7 @@ section {
     right: 10%;
     bottom: 10%;
     background-color: #fff;
-    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 25px rgba(0, 0, 0, 0.08);
     padding: 20px;
     text-align: center;
 }
@@ -753,7 +751,6 @@ section {
     color: var(--color-primary);
     margin-bottom: 30px;
     font-size: 32px;
-    margin-bottom: 30px;
     background: rgba(206, 18, 18, 0.1);
     border-radius: 50px;
     display: flex;
@@ -902,7 +899,6 @@ section {
     font-weight: 500;
     color: var(--color-secondary);
     font-family: var(--font-secondary);
-    font-weight: 30px;
     margin-bottom: 5px;
 }
 
@@ -1011,7 +1007,7 @@ section {
 
 .events .event-item {
     background-size: cover;
-    background-position: cente;
+    background-position: center;
     min-height: 600px;
     padding: 30px;
 }
@@ -1084,7 +1080,7 @@ section {
     text-align: center;
     border-radius: 5px;
     background: #fff;
-    box-shadow: 0px 0 30px rgba(55, 55, 63, 0.08);
+    box-shadow: 0 0 30px rgba(55, 55, 63, 0.08);
     transition: 0.3s;
 }
 
@@ -1161,7 +1157,7 @@ section {
 
 .chefs .chef-member:hover {
     transform: scale(1.08);
-    box-shadow: 0px 0 30px rgba(55, 55, 63, 0.15);
+    box-shadow: 0 0 30px rgba(55, 55, 63, 0.15);
 }
 
 .chefs .chef-member:hover .social {
@@ -1257,7 +1253,6 @@ section {
     border-radius: 0;
     box-shadow: none;
     font-size: 14px;
-    border-radius: 0;
 }
 
 .book-a-table .php-email-form input:focus,
