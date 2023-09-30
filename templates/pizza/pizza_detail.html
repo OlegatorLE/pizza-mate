@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load select_price_by_size_filter %}
 
 {% block content %}
   <div class="container">
@@ -19,28 +20,48 @@
           {% endfor %}
         </ul>
 
-        <h3>Price:</h3>
-        {% if size == "Small" %}
-          <p>Small: {{ pizza.get_prices.Small }} UAH</p>
-        {% endif %}
-        {% if size == "Medium" %}
-          <p>Medium: {{ pizza.get_prices.Medium }} UAH</p>
-        {% endif %}
-        {% if size == "Big" %}
-          <p>Big: {{ pizza.get_prices.Big }} UAH</p>
-        {% endif %}
+{#        <h3>Price:</h3>#}
+{#        {% if size == "Small" %}#}
+{#          <p>Small: {{ pizza.get_prices.Small }} UAH</p>#}
+{#        {% endif %}#}
+{#        {% if size == "Medium" %}#}
+{#          <p>Medium: {{ pizza.get_prices.Medium }} UAH</p>#}
+{#        {% endif %}#}
+{#        {% if size == "Big" %}#}
+{#          <p>Big: {{ pizza.get_prices.Big }} UAH</p>#}
+{#        {% endif %}#}
+{##}
+{#        <h3>Order Now</h3>#}
+{#      <form method="post" action="{% url 'pizza:order-pizza' pizza.id %}">#}
+{#        {% csrf_token %}#}
+{#        <button type="submit" class="btn btn-success">Order Pizza</button>#}
+{#      </form>#}
+
+       {% with selected_price=pizza_prices|get_item:size %}
+          <h3>Price:</h3>
+          <p>{{ size }}: {{ selected_price }} UAH</p>
+
+          <button class="btn btn-secondary" onclick="history.back()">Back previous page</button>
+
+          <form method="post" action="{% url 'pizza:order-pizza' pizza.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="pizza_price" value="{{ selected_price }}">
+            <input type="hidden" name="updated_ingredients" value="{{ updated_ingredients }}">
+            <button type="submit" class="btn btn-success">Order Pizza</button>
+          </form>
+        {% endwith %}
+
       </div>
 
       <!-- Right column: Editing Ingredients -->
       <div class="col-md-4">
-        <h3>Change ingredients:</h3>
 
         <form method="post" action="{% url 'pizza:update-pizza-ingredients' pizza.id %}">
           {% csrf_token %}
           <div class="row">
             <div class="col-md-6">
               <h4>Sauces:</h4>
-              {% for ingredient in sauce %}
+              {% for ingredient in sauces %}
                 <ul>
                   {% include "includes/ingredients_list.html" %}
                 </ul>
@@ -48,7 +69,7 @@
             </div>
             <div class="col-md-6">
               <h4>Vegetables:</h4>
-              {% for ingredient in vegetable %}
+              {% for ingredient in vegetables %}
                 <ul>
                   {% include "includes/ingredients_list.html" %}
                 </ul>
@@ -79,7 +100,7 @@
           <div class="row">
             <div class="col-md-6">
               <h4>Fruits:</h4>
-              {% for ingredient in fruit %}
+              {% for ingredient in fruits %}
                 <ul>
                   {% include "includes/ingredients_list.html" %}
                 </ul>
@@ -87,7 +108,7 @@
             </div>
             <div class="col-md-6">
               <h4>Cheese edge:</h4>
-              {% for ingredient in edge %}
+              {% for ingredient in cheese_edge %}
                 <ul>
                   {% include "includes/ingredients_list.html" %}
                 </ul>
@@ -101,8 +122,6 @@
           <button type="submit" class="btn btn-primary">Update Ingredients</button>
         </form>
 
-        <h3>Order Now</h3>
-        <button type="button" class="btn btn-success">Order Pizza</button>
       </div>
     </div>
   </div>

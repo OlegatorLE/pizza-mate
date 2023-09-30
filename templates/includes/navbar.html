@@ -16,7 +16,7 @@
             {{ user.get_username }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Orders</a></li>
+            <li><a class="dropdown-item" href="{% url 'pizza:user-orders' %}">Orders</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li>
               <hr class="dropdown-divider">
