@@ -4,7 +4,7 @@ PizzaMate is a web application built with Django, allowing users to browse, cust
 
 ![demo.png](demo.png)
 
-##Check it out!
+## Check it out!
 
 link to render soon...
 
