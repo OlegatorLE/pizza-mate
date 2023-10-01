@@ -1,0 +1,14 @@
+{% load crispy_forms_field %}
+
+<div class="checkbox-columns">
+  {% for choice in field.field.choices %}
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="{{ field.name }}" value="{{ choice.0 }}"
+             id="{{ field.auto_id }}_{{ forloop.counter0 }}"
+          {% if choice.0 in field.value %} checked="checked"{% endif %}>
+      <label class="form-check-label" for="{{ field.auto_id }}_{{ forloop.counter0 }}">
+        {{ choice.1 }}
+      </label>
+    </div>
+  {% endfor %}
+</div>

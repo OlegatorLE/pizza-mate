@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load select_price_by_size_filter %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-6">
+        <img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" class="img-fluid">
+        <h3>Description:</h3>
+        <p>{{ pizza.description }}</p>
+      </div>
+
+      <div class="col-md-6">
+        <h1>{{ pizza.name }}</h1>
+
+        <h3>Ingredients:</h3>
+        <ul>
+          {% for ingredient in updated_ingredients %}
+            <li>{{ ingredient.quantity }} piece of {{ ingredient.ingredient }} </li>
+          {% endfor %}
+        </ul>
+
+        {% with selected_price=pizza_prices|get_item:pizza_size %}
+          <h3>Price:</h3>
+          <p>{{ pizza_size }}: {{ selected_price }} UAH</p>
+
+          <button class="btn btn-secondary" onclick="history.back()">Back previous page</button>
+
+          <form method="post" action="{% url 'pizza:order-pizza' pizza.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="pizza_price" value="{{ selected_price }}">
+            <input type="hidden" name="updated_ingredients" value="{{ updated_ingredients }}">
+            <button type="submit" class="btn btn-success">Order Pizza</button>
+          </form>
+        {% endwith %}
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

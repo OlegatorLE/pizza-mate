@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header">
+        <h2>Our Menu</h2>
+        <p>Check Our <span>Mate Menu</span></p>
+      </div>
+      {% if not object_list and search_query %}
+        <div class="alert alert-warning">
+          No pizzas found for the search query: "{{ search_query }}"
+        </div>
+      {% endif %}
+      <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+        <div class="tab-pane fade active show" id="menu-starters">
+          <div class="row gy-5">
+            {% for pizza in pizza_list %}
+              <div class="col-lg-4 menu-item">
+                <div class="flex-container">
+                  <a href="{{ pizza.image.url }}" class="glightbox">
+                    <img src="{{ pizza.image.url }}" class="menu-img img-fluid" alt="">
+                  </a>
+                  <h4>{{ pizza.name }}</h4>
+                  <p class="ingredients">
+                    {{ pizza.description }}
+                  </p>
+                </div>
+                <div class="grid-container">
+                  <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="size" value="Small">
+                    <button type="submit" class="btn btn-primary" style="width:90px">Small</button>
+                  </form>
+                  <p class="price">{{ pizza.get_prices.Small }} UAH</p>
+                </div>
+                <div class="grid-container">
+                  <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="size" value="Medium">
+                    <button type="submit" class="btn btn-primary" style="width:90px">Medium</button>
+                  </form>
+                  <p class="price">{{ pizza.get_prices.Medium }} UAH</p>
+                </div>
+                <div class="grid-container">
+                  <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="size" value="Big">
+                    <button type="submit" class="btn btn-primary" style="width:90px">Big</button>
+                  </form>
+                  <p class="price">{{ pizza.get_prices.Big }} UAH</p>
+                </div>
+              </div><!-- Menu Item -->
+            {% endfor %}
+          </div>
+        </div><!-- End Starter Menu Content -->
+      </div>
+    </div>
+  </section><!-- End Menu Section -->
+{% endblock %}
