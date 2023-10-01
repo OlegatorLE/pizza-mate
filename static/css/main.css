@@ -59,6 +59,7 @@ h6 {
 /*--------------------------------------------------------------
 # Sections & Section Header
 --------------------------------------------------------------*/
+
 section {
     overflow: hidden;
     padding: 80px 0;
@@ -1658,6 +1659,7 @@ section {
 .btn, .price {
     margin: 0;
 }
+
 .custom-btn {
     width: 80px;
 }

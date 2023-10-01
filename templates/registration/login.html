@@ -10,7 +10,7 @@
     <h3>Please, enter your Username and Password</h3>
 
     {% if next %}
-      <p>Please login to see this page.</p>
+      <p>Please log in to see this page.</p>
     {% endif %}
 
     <form method="post" action="{% url 'login' %}">
@@ -20,8 +20,6 @@
       <input type="submit" value="Login" class="btn btn-primary"/>
       <input type="hidden" name="next" value="{{ next }}"/>
     </form>
-    <p>Don't have an acoount? Please, <a href="{% url 'pizza:customuser-create' %}">register here</a></p>
+    <p>Don't have an account? Please, <a href="{% url 'pizza:customuser-create' %}">register here</a></p>
   </div>
 {% endblock %}
-
-

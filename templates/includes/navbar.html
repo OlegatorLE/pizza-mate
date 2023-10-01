@@ -11,22 +11,23 @@
           <a class="nav-link active" aria-current="page" href="{% url 'pizza:home-page' %}">Home</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ user.get_username }}
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'pizza:user-orders' %}">Orders</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
-          </ul>
-        </li>
-          {% else %}
-            <a class="dropdown-item" href="{% url "login" %}"?next={{request.path}}">Login</a>
-                {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ user.get_username }}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'pizza:custom-pizza' %}">Create My Pizza</a></li>
+              <li><a class="dropdown-item" href="{% url 'pizza:user-orders' %}">Orders</a></li>
+              <li><a class="dropdown-item" href="{% url 'pizza:profile' %}">My Profile</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <a class="dropdown-item" href="{% url "login" %}?next={{ request.path }}">Login</a>
+        {% endif %}
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

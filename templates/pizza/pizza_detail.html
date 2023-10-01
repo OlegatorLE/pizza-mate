@@ -20,23 +20,6 @@
           {% endfor %}
         </ul>
 
-{#        <h3>Price:</h3>#}
-{#        {% if size == "Small" %}#}
-{#          <p>Small: {{ pizza.get_prices.Small }} UAH</p>#}
-{#        {% endif %}#}
-{#        {% if size == "Medium" %}#}
-{#          <p>Medium: {{ pizza.get_prices.Medium }} UAH</p>#}
-{#        {% endif %}#}
-{#        {% if size == "Big" %}#}
-{#          <p>Big: {{ pizza.get_prices.Big }} UAH</p>#}
-{#        {% endif %}#}
-{##}
-{#        <h3>Order Now</h3>#}
-{#      <form method="post" action="{% url 'pizza:order-pizza' pizza.id %}">#}
-{#        {% csrf_token %}#}
-{#        <button type="submit" class="btn btn-success">Order Pizza</button>#}
-{#      </form>#}
-
        {% with selected_price=pizza_prices|get_item:size %}
           <h3>Price:</h3>
           <p>{{ size }}: {{ selected_price }} UAH</p>
