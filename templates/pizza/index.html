@@ -7,6 +7,11 @@
         <h2>Our Menu</h2>
         <p>Check Our <span>Mate Menu</span></p>
       </div>
+      {% if not object_list and search_query %}
+        <div class="alert alert-warning">
+          No pizzas found for the search query: "{{ search_query }}"
+        </div>
+      {% endif %}
       <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
         <div class="tab-pane fade active show" id="menu-starters">
           <div class="row gy-5">

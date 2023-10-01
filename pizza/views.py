@@ -27,14 +27,29 @@ class PizzaListView(generic.ListView):
     template_name = "pizza/index.html"
 
     def get_queryset(self) -> QuerySet["Pizza"]:
+        search_query = self.request.GET.get("search", "")
         user = self.request.user
+
         if user.is_authenticated:
             queryset = Pizza.objects.filter(
                 Q(user=user) | Q(user__isnull=True)
             ).select_related("user")
         else:
             queryset = Pizza.objects.filter(user__isnull=True)
+
+        if search_query:
+            pizzas = Pizza.objects.filter(name__icontains=search_query)
+            ingredient_pizzas = Pizza.objects.filter(
+                ingredients__name__icontains=search_query
+            )
+            queryset = (pizzas | ingredient_pizzas).distinct()
+
         return queryset
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        context["search_query"] = self.request.GET.get("search", "")
+        return context
 
 
 class CustomUserCreateView(generic.CreateView):
