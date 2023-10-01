@@ -28,6 +28,7 @@ link to render soon...
 
 1. **Clone the Repository**:
 
+```shell
 git clone https://github.com/OlegatorLE/pizza-mate
 cd pizza-mate
 python -m venv venv
@@ -36,3 +37,4 @@ pip install -r requirements.txt
 Update the DATABASES setting in settings.py with your database configurations.
 python manage.py migrate
 python manage.py runserver
+```
