@@ -38,3 +38,6 @@ Update the DATABASES setting in settings.py with your database configurations.
 python manage.py migrate
 python manage.py runserver
 ```
+
+### DB relations
+![db_diagram.png](db_diagram.png)
