@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load select_price_by_size_filter %}
 
 {% block content %}
   <section id="menu" class="menu">
@@ -17,38 +18,29 @@
           <div class="row gy-5">
             {% for pizza in pizza_list %}
               <div class="col-lg-4 menu-item">
-                <div class="flex-container">
-                  <a href="{{ pizza.image.url }}" class="glightbox">
-                    <img src="{{ pizza.image.url }}" class="menu-img img-fluid" alt="">
-                  </a>
-                  <h4>{{ pizza.name }}</h4>
-                  <p class="ingredients">
-                    {{ pizza.description }}
-                  </p>
-                </div>
-                <div class="grid-container">
-                  <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="size" value="Small">
-                    <button type="submit" class="btn btn-primary" style="width:90px">Small</button>
-                  </form>
-                  <p class="price">{{ pizza.get_prices.Small }} UAH</p>
-                </div>
-                <div class="grid-container">
-                  <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="size" value="Medium">
-                    <button type="submit" class="btn btn-primary" style="width:90px">Medium</button>
-                  </form>
-                  <p class="price">{{ pizza.get_prices.Medium }} UAH</p>
-                </div>
-                <div class="grid-container">
-                  <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="size" value="Big">
-                    <button type="submit" class="btn btn-primary" style="width:90px">Big</button>
-                  </form>
-                  <p class="price">{{ pizza.get_prices.Big }} UAH</p>
+                <div class="flex-container pizza-list">
+                  <div>
+                    <a href="{{ pizza.image.url }}" class="glightbox">
+                      <img src="{{ pizza.image.url }}" class="menu-img img-fluid" alt="">
+                    </a>
+                    <h4><strong>{{ pizza.name }}</strong></h4>
+                    <p class="ingredients">
+                      {{ pizza.description }}
+                    </p>
+                  </div>
+                <hr>
+                  <div class="grid-container" style="flex-direction: column;">
+                    {% for size in pizza.get_prices.keys %}
+                      <div style="display: flex; flex-direction: column;">
+                        <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="size" value="{{ size }}">
+                          <button type="submit" class="btn btn-success" style="width:90px">{{ size }}</button>
+                        </form>
+                        <p class="price" style="margin-top: auto;">{{ pizza.get_prices|get_item:size }} UAH</p>
+                      </div>
+                    {% endfor %}
+                  </div>
                 </div>
               </div><!-- Menu Item -->
             {% endfor %}

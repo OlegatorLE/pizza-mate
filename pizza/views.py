@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import AbstractUser
 from django.db import transaction
@@ -55,7 +56,14 @@ class PizzaListView(generic.ListView):
 class CustomUserCreateView(generic.CreateView):
     model = CustomUser
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("pizza:profile")
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        login(self.request, self.object)
+
+        return response
 
 
 class PizzaDetailView(generic.DetailView):
