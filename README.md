@@ -6,7 +6,7 @@ PizzaMate is a web application built with Django, allowing users to browse, cust
 
 ## Check it out!
 
-link to render soon...
+[Pizza Mate project deployed to Render](https://pizza-mate.onrender.com/)
 
 ## Features
 
