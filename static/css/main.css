@@ -906,12 +906,14 @@ section {
     font-family: var(--font-secondary);
     color: #8d8d9b;
     margin-bottom: 5px;
+    text-align: justify;
 }
 
 .menu .tab-content .menu-item .price {
     font-size: 24px;
     font-weight: 700;
     color: var(--color-primary);
+
 }
 
 /*--------------------------------------------------------------
@@ -1662,4 +1664,10 @@ section {
 
 .custom-btn {
     width: 80px;
+}
+
+.pizza-list {
+    padding: 20px;
+    background-color: #f4f4f4;
+    height: 100%;
 }

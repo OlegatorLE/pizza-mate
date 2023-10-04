@@ -8,7 +8,7 @@ PizzaMate is a web application built with Django, allowing users to browse, cust
 login: user
 password: user12345
 
-![link to render](https://pizza-mate.onrender.com/)
+[Pizza Mate project deployed to Render](https://pizza-mate.onrender.com/)
 
 ## Features
 
@@ -40,3 +40,6 @@ Update the DATABASES setting in settings.py with your database configurations.
 python manage.py migrate
 python manage.py runserver
 ```
+
+### DB relations
+![db_diagram.png](db_diagram.png)

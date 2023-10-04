@@ -1,186 +1,314 @@
 [
-    {
-        "model": "pizza.ingredient",
-        "pk": 1,
-        "fields": {
-            "name": "Tomato Sauce",
-            "description": "A smooth sauce made from pureed tomatoes, often seasoned with herbs and spices."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 2,
-        "fields": {
-            "name": "Mozzarella Cheese",
-            "description": "A soft, white cheese with a high moisture content, commonly used for pizzas."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 3,
-        "fields": {
-            "name": "Fresh Basil",
-            "description": "A green aromatic herb used for its fresh flavor and fragrant aroma."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 4,
-        "fields": {
-            "name": "Olive Oil",
-            "description": "A liquid fat obtained from olives, commonly used for cooking and dressings."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 5,
-        "fields": {
-            "name": "Salt",
-            "description": "A white crystalline substance used to season and preserve food."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 6,
-        "fields": {
-            "name": "Pepperoni",
-            "description": "A spicy Italian-American variety of salami, commonly used as a pizza topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 7,
-        "fields": {
-            "name": "Oregano",
-            "description": "A fragrant herb commonly used in Italian cuisine for its robust flavor."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 8,
-        "fields": {
-            "name": "Ham",
-            "description": "A type of meat coming from the hind leg of a pig, often sliced and used as a pizza topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 9,
-        "fields": {
-            "name": "Pineapple",
-            "description": "A tropical fruit with a sweet and tangy flavor, often used as a pizza topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 10,
-        "fields": {
-            "name": "BBQ Sauce",
-            "description": "A flavorful sauce often made from tomatoes, vinegar, and spices, used as a base or topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 11,
-        "fields": {
-            "name": "Chicken",
-            "description": "Poultry meat that is often cooked and sliced for use as a pizza topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 12,
-        "fields": {
-            "name": "Red Onion",
-            "description": "A type of onion with a mild to sweet flavor, often sliced and used as a pizza topping or in salads."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 13,
-        "fields": {
-            "name": "Bell Peppers",
-            "description": "A type of sweet pepper that can be green, red, yellow, or orange, commonly used sliced in various dishes."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 14,
-        "fields": {
-            "name": "Black Olives",
-            "description": "A type of olive that is fully ripened, often sliced and used as a pizza topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 15,
-        "fields": {
-            "name": "Spinach",
-            "description": "A leafy green vegetable known for its health benefits and commonly used as a pizza topping or in salads."
-        }
-    },
-        {
-        "model": "pizza.ingredient",
-        "pk": 16,
-        "fields": {
-            "name": "Alfredo Sauce",
-            "description": "A rich and creamy white sauce made with butter, heavy cream, and Parmesan cheese."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 17,
-        "fields": {
-            "name": "Pepperoni Sausage",
-            "description": "A variant of pepperoni that is thicker and often spicier, used as a topping for pizzas and other dishes."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 18,
-        "fields": {
-            "name": "Hunting Sausages",
-            "description": "Small, smoked sausages made from a mixture of meats, commonly used as a snack or pizza topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 19,
-        "fields": {
-            "name": "Bulgarian Pepper",
-            "description": "A type of sweet bell pepper, known for its rich flavor and vibrant colors."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 20,
-        "fields": {
-            "name": "Mustard-Honey Sauce",
-            "description": "A sweet and tangy sauce made by combining mustard and honey, often used as a glaze or dipping sauce."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 21,
-        "fields": {
-            "name": "Cheddar Cheese",
-            "description": "A smooth and sharp-tasting cheese that melts well, commonly used in cooking and as a topping."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 22,
-        "fields": {
-            "name": "Bacon",
-            "description": "Cured meat from the sides and belly of a pig, known for its rich flavor and crispy texture."
-        }
-    },
-    {
-        "model": "pizza.ingredient",
-        "pk": 23,
-        "fields": {
-            "name": "Green Onions",
-            "description": "A type of onion that is harvested young, known for its mild flavor and used as a garnish or ingredient in various dishes."
-        }
+  {
+    "model": "pizza.pizzasize",
+    "pk": 1,
+    "fields": {
+      "name": "Small",
+      "weight": 350,
+      "multiplier": 0.8
     }
+  },
+  {
+    "model": "pizza.pizzasize",
+    "pk": 2,
+    "fields": {
+      "name": "Medium",
+      "weight": 500,
+      "multiplier": 1.0
+    }
+  },
+  {
+    "model": "pizza.pizzasize",
+    "pk": 3,
+    "fields": {
+      "name": "Big",
+      "weight": 700,
+      "multiplier": 1.2
+    }
+  },
+  {
+    "model": "pizza.ingredienttype",
+    "pk": 1,
+    "fields": {
+      "name": "Cheese"
+    }
+  },
+  {
+    "model": "pizza.ingredienttype",
+    "pk": 2,
+    "fields": {
+      "name": "Meat"
+    }
+  },
+  {
+    "model": "pizza.ingredienttype",
+    "pk": 3,
+    "fields": {
+      "name": "Vegetables"
+    }
+  },
+  {
+    "model": "pizza.ingredienttype",
+    "pk": 4,
+    "fields": {
+      "name": "Sauces"
+    }
+  },
+  {
+    "model": "pizza.ingredienttype",
+    "pk": 5,
+    "fields": {
+      "name": "Cheese edge"
+    }
+  },
+  {
+    "model": "pizza.ingredienttype",
+    "pk": 6,
+    "fields": {
+      "name": "Fruits"
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 1,
+    "fields": {
+      "name": "Tomato Sauce",
+      "description": "A smooth sauce made from pureed tomatoes, often seasoned with herbs and spices.",
+      "ingredient_type": 4
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 2,
+    "fields": {
+      "name": "Mozzarella",
+      "description": "A soft, white cheese with a high moisture content, commonly used for pizzas.",
+      "ingredient_type": 1
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 3,
+    "fields": {
+      "name": "Fresh Basil",
+      "description": "A green aromatic herb used for its fresh flavor and fragrant aroma.",
+      "ingredient_type": 3
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 6,
+    "fields": {
+      "name": "Pepperoni",
+      "description": "A spicy Italian-American variety of salami, commonly used as a pizza topping.",
+      "ingredient_type": 2
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 7,
+    "fields": {
+      "name": "Oregano",
+      "description": "A fragrant herb commonly used in Italian cuisine for its robust flavor.",
+      "ingredient_type": 3
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 8,
+    "fields": {
+      "name": "Ham",
+      "description": "A type of meat coming from the hind leg of a pig, often sliced and used as a pizza topping.",
+      "ingredient_type": 2
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 9,
+    "fields": {
+      "name": "Pineapple",
+      "description": "A tropical fruit with a sweet and tangy flavor, often used as a pizza topping.",
+      "ingredient_type": 6
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 10,
+    "fields": {
+      "name": "BBQ Sauce",
+      "description": "A flavorful sauce often made from tomatoes, vinegar, and spices, used as a base or topping.",
+      "ingredient_type": 4
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 11,
+    "fields": {
+      "name": "Chicken",
+      "description": "Poultry meat that is often cooked and sliced for use as a pizza topping.",
+      "ingredient_type": 2
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 12,
+    "fields": {
+      "name": "Red Onion",
+      "description": "A type of onion with a mild to sweet flavor, often sliced and used as a pizza topping or in salads.",
+      "ingredient_type": 3
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 13,
+    "fields": {
+      "name": "Bell Peppers",
+      "description": "A type of sweet pepper that can be green, red, yellow, or orange, commonly used sliced in various dishes.",
+      "ingredient_type": 3
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 14,
+    "fields": {
+      "name": "Black Olives",
+      "description": "A type of olive that is fully ripened, often sliced and used as a pizza topping.",
+      "ingredient_type": 6
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 15,
+    "fields": {
+      "name": "Spinach",
+      "description": "A leafy green vegetable known for its health benefits and commonly used as a pizza topping or in salads.",
+      "ingredient_type": 3
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 16,
+    "fields": {
+      "name": "Alfredo Sauce",
+      "description": "A rich and creamy white sauce made with butter, heavy cream, and Parmesan cheese.",
+      "ingredient_type": 4
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 17,
+    "fields": {
+      "name": "Pepperoni Sausage",
+      "description": "A variant of pepperoni that is thicker and often spicier, used as a topping for pizzas and other dishes.",
+      "ingredient_type": 4
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 18,
+    "fields": {
+      "name": "Hunting Sausages",
+      "description": "Small, smoked sausages made from a mixture of meats, commonly used as a snack or pizza topping.",
+      "ingredient_type": 2
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 20,
+    "fields": {
+      "name": "Mustard-Honey Sauce",
+      "description": "A sweet and tangy sauce made by combining mustard and honey, often used as a glaze or dipping sauce.",
+      "ingredient_type": 4
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 21,
+    "fields": {
+      "name": "Cheddar",
+      "description": "A smooth and sharp-tasting cheese that melts well, commonly used in cooking and as a topping.",
+      "ingredient_type": 1
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 22,
+    "fields": {
+      "name": "Bacon",
+      "description": "Cured meat from the sides and belly of a pig, known for its rich flavor and crispy texture.",
+      "ingredient_type": 2
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 23,
+    "fields": {
+      "name": "Green Onion",
+      "description": "A type of onion that is harvested young, known for its mild flavor and used as a garnish or ingredient in various dishes.",
+      "ingredient_type": 3
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 24,
+    "fields": {
+      "name": "Mushrooms",
+      "description": "Edible fungi that come in various shapes and sizes, often used as a topping or ingredient in various dishes.",
+      "ingredient_type": 3
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 25,
+    "fields": {
+      "name": "Parmesan",
+      "description": " ",
+      "ingredient_type": 1
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 26,
+    "fields": {
+      "name": "Gorgonzola",
+      "description": " ",
+      "ingredient_type": 1
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 27,
+    "fields": {
+      "name": "Feta",
+      "description": "  ",
+      "ingredient_type": 1
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 28,
+    "fields": {
+      "name": "Pear",
+      "description": "  ",
+      "ingredient_type": 6
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 29,
+    "fields": {
+      "name": "Suluguni",
+      "description": " ",
+      "ingredient_type": 5
+    }
+  },
+  {
+    "model": "pizza.ingredient",
+    "pk": 30,
+    "fields": {
+      "name": "Cream Cheese",
+      "description": " ",
+      "ingredient_type": 5
+    }
+  }
 ]

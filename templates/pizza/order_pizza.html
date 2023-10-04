@@ -10,14 +10,13 @@
         <div>
           <h4>Customer Information</h4>
           <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
-          <p>Email: {{ user.email }}</p>
           <p>Phone: {{ user.phone }}</p>
           <p>Address: {{ user.address }}</p>
         </div>
       </div>
       <div class="col-md-6">
         <img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" class="img-fluid">
-        <p>{{ pizza.name }}</p>
+        <p><strong>{{ pizza.name }}</strong></p>
         <p id="dynamic-price">{{ pizza_price }} UAH</p>
 
         <form action="{% url 'pizza:order-confirmation' %}" method="post">
@@ -28,7 +27,7 @@
           </div>
           <input type="hidden" name="pizza" value="{{ pizza.id }}">
           <input type="hidden" name="pizza_price" value="{{ pizza_price }}">
-          <button type="submit" class="btn btn-primary">Confirm Order</button>
+          <button type="submit" class="btn btn-success">Confirm Order</button>
         </form>
       </div>
     </div>
