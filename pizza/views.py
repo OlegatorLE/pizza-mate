@@ -58,7 +58,7 @@ class CustomUserCreateView(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("pizza:profile")
 
-    def form_valid(self, form):
+    def form_valid(self, form) -> HttpResponse:
         response = super().form_valid(form)
 
         login(self.request, self.object)
@@ -99,6 +99,9 @@ class PizzaDetailView(generic.DetailView):
         return context
 
 
+# The main logic that calculates changes in the number of ingredients
+# that the client changes
+
 # Price change if ingredients are added or removed
 def get_updated_pizza_prices(pizza_prices, price_difference) -> dict:
     if price_difference != 0:
@@ -121,6 +124,7 @@ def get_ingredient_quantity_dict(selected_ingredients, request) -> dict:
     }
 
 
+# Show full updated ingredients and price
 def show_updated_pizza(request, *args, **kwargs) -> HttpResponse:
     pizza = get_object_or_404(
         Pizza.objects.prefetch_related("ingredients"), id=kwargs["pk"]
@@ -219,6 +223,7 @@ class ProfileCustomUserView(LoginRequiredMixin, generic.UpdateView):
 
 
 class CustomPizzaCreateView(LoginRequiredMixin, generic.CreateView):
+    BASE_PRICE = 158
     model = Pizza
     template_name = "pizza/custom_pizza.html"
     form_class = CustomPizzaCreateForm
@@ -227,7 +232,7 @@ class CustomPizzaCreateView(LoginRequiredMixin, generic.CreateView):
         ingredient_ids = self.request.POST.getlist("ingredients")
         pizza = form.save(commit=False)
         pizza.user = self.request.user
-        pizza.base_price = 158 + (len(ingredient_ids) * 10)
+        pizza.base_price = self.BASE_PRICE + (len(ingredient_ids) * 10)
         pizza.save()
         pizza.ingredients.set(ingredient_ids)
 
