@@ -2,11 +2,13 @@
 
 PizzaMate is a web application built with Django, allowing users to browse, customize, and order pizzas. Whether you want a Margherita or a completely custom pizza, PizzaMate has got you covered!
 
-![demo.png](demo.png)
+![demo.png](static/img/demo.png)
 
 ## Check it out!
+login: user
+password: user12345
 
-link to render soon...
+![link to render](https://pizza-mate.onrender.com/)
 
 ## Features
 
