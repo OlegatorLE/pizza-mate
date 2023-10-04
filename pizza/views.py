@@ -99,6 +99,28 @@ class PizzaDetailView(generic.DetailView):
         return context
 
 
+# Price change if ingredients are added or removed
+def get_updated_pizza_prices(pizza_prices, price_difference) -> dict:
+    if price_difference != 0:
+        return {
+            key: price + price_difference * 10
+            for key, price in pizza_prices.items()
+        }
+    return pizza_prices
+
+
+# Dictionary of new quantities ingredients
+def get_ingredient_quantity_dict(selected_ingredients, request) -> dict:
+    ingredient_quantities = {
+        ingredient_id: request.POST.get(f"ingredient_qty_{ingredient_id}", 1)
+        for ingredient_id in selected_ingredients
+    }
+    ingredients = Ingredient.objects.filter(id__in=ingredient_quantities.keys())
+    return {
+        str(ing.id): ingredient_quantities[str(ing.id)] for ing in ingredients
+    }
+
+
 def show_updated_pizza(request, *args, **kwargs) -> HttpResponse:
     pizza = get_object_or_404(
         Pizza.objects.prefetch_related("ingredients"), id=kwargs["pk"]
@@ -110,23 +132,17 @@ def show_updated_pizza(request, *args, **kwargs) -> HttpResponse:
     ).count()
 
     selected_ingredients = request.POST.getlist("ingredients")
-    ingredient_quantities = {}
-    for ingredient_id in selected_ingredients:
-        qty_key = f"ingredient_qty_{ingredient_id}"
-        ingredient_quantities[ingredient_id] = request.POST.get(qty_key, 1)
+    ingredient_quantity_dict = get_ingredient_quantity_dict(
+        selected_ingredients, request)
 
-    ingredients = Ingredient.objects.filter(
-        id__in=ingredient_quantities.keys()
-    )
-    ingredient_quantity_dict = {
-        str(ing.id): ingredient_quantities[str(ing.id)] for ing in ingredients
-    }
     updated_ingredients = [
         {
             "ingredient": ingredient,
             "quantity": ingredient_quantity_dict[str(ingredient.id)],
         }
-        for ingredient in ingredients
+        for ingredient in Ingredient.objects.filter(
+            id__in=ingredient_quantity_dict.keys()
+        )
     ]
 
     pizza_size = request.POST.get("size")
@@ -134,17 +150,14 @@ def show_updated_pizza(request, *args, **kwargs) -> HttpResponse:
     updated_ingredients_quantity = sum(
         int(ingredient["quantity"]) for ingredient in updated_ingredients
     )
-
     price_difference = updated_ingredients_quantity - base_ingredients_quantity
-    if price_difference != 0:
-        for key in pizza_prices:
-            pizza_prices[key] += price_difference * 10
+    updated_prices = get_updated_pizza_prices(pizza_prices, price_difference)
 
     context = {
         "pizza": pizza,
         "updated_ingredients": updated_ingredients,
         "pizza_size": pizza_size,
-        "pizza_prices": pizza_prices,
+        "pizza_prices": updated_prices,
     }
 
     return render(request, "pizza/update_pizza_detail.html", context)
