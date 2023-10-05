@@ -37,14 +37,12 @@
 {% block javascript %}
   <script>
       document.getElementById("quantity").addEventListener("input", function () {
-          // Отримуємо базову ціну піци та кількість
+
           let basePrice = parseFloat({{ pizza_price }});
           let quantity = parseFloat(this.value);
 
-          // Обчислюємо нову ціну
           let newPrice = basePrice * quantity;
 
-          // Встановлюємо нову ціну в елемент
           document.getElementById("dynamic-price").textContent = newPrice + " UAH";
       });
   </script>

@@ -1,6 +1,5 @@
-from django.test import TestCase, override_settings
-from pizza.models import CustomUser, PizzaSize, IngredientType, Ingredient, \
-    Pizza, Order, OrderPizza
+from django.test import TestCase
+from pizza.models import CustomUser, PizzaSize, Pizza, Order, OrderPizza
 
 
 class ModelsTest(TestCase):
