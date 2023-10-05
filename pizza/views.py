@@ -99,8 +99,11 @@ class PizzaDetailView(generic.DetailView):
         return context
 
 
-# The main logic that calculates changes in the number of ingredients
-# that the client changes
+"""
+The main logic that calculates changes in the number of ingredients
+that the client changes
+"""
+
 
 # Price change if ingredients are added or removed
 def get_updated_pizza_prices(pizza_prices, price_difference) -> dict:
