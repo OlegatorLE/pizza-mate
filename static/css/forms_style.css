@@ -1,0 +1,6 @@
+.checkbox-columns {
+    column-count: 8;
+    column-gap: 30px;
+    display: inline-block;
+    margin: 0 40px 10px 10px
+}

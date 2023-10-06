@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row text-center">
+      <h2>Order Details</h2>
+      <div class="col-md-6">
+
+
+        <div>
+          <h4>Customer Information</h4>
+          <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+          <p>Phone: {{ user.phone }}</p>
+          <p>Address: {{ user.address }}</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" class="img-fluid">
+        <p><strong>{{ pizza.name }}</strong></p>
+        <p id="dynamic-price">{{ pizza_price }} UAH</p>
+
+        <form action="{% url 'pizza:order-confirmation' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" style="width:40px;">
+          </div>
+          <input type="hidden" name="pizza" value="{{ pizza.id }}">
+          <input type="hidden" name="pizza_price" value="{{ pizza_price }}">
+          <button type="submit" class="btn btn-success">Confirm Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script>
+      document.getElementById("quantity").addEventListener("input", function () {
+
+          let basePrice = parseFloat({{ pizza_price }});
+          let quantity = parseFloat(this.value);
+
+          let newPrice = basePrice * quantity;
+
+          document.getElementById("dynamic-price").textContent = newPrice + " UAH";
+      });
+  </script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load select_price_by_size_filter %}
+
+{% block content %}
+  <section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header">
+        <h2>Our Menu</h2>
+        <p>Check Our <span>Mate Menu</span></p>
+      </div>
+      {% if not object_list and search_query %}
+        <div class="alert alert-warning">
+          No pizzas found for the search query: "{{ search_query }}"
+        </div>
+      {% endif %}
+      <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+        <div class="tab-pane fade active show" id="menu-starters">
+          <div class="row gy-5">
+            {% for pizza in pizza_list %}
+              <div class="col-lg-4 menu-item">
+                <div class="flex-container pizza-list">
+                  <div>
+                    <a href="{{ pizza.image.url }}" class="glightbox">
+                      <img src="{{ pizza.image.url }}" class="menu-img img-fluid" alt="">
+                    </a>
+                    <h4><strong>{{ pizza.name }}</strong></h4>
+                    <p class="ingredients">
+                      {{ pizza.description }}
+                    </p>
+                  </div>
+                <hr>
+                  <div class="grid-container" style="flex-direction: column;">
+                    {% for size in pizza.get_prices.keys %}
+                      <div style="display: flex; flex-direction: column;">
+                        <form method="post" action="{% url 'pizza:pizza-detail' pk=pizza.id %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="size" value="{{ size }}">
+                          <button type="submit" class="btn btn-success" style="width:90px">{{ size }}</button>
+                        </form>
+                        <p class="price" style="margin-top: auto;">{{ pizza.get_prices|get_item:size }} UAH</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div><!-- Menu Item -->
+            {% endfor %}
+          </div>
+        </div><!-- End Starter Menu Content -->
+      </div>
+    </div>
+  </section><!-- End Menu Section -->
+{% endblock %}

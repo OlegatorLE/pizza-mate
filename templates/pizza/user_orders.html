@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Your Orders</h2>
+        <ul>
+            {% for order in object_list %}
+            <li>
+                <strong>Order #{{ order.id }}</strong><br>
+                Date: {{ order.order_date }}<br>
+                Total price: {{ order.total_price }} UAH<br>
+                Pizzas:
+                <ul>
+                    {% for order_pizza in order.orderpizza_set.all %}
+                    <li>
+                        {{ order_pizza.pizza.name }} - Quantity: {{ order_pizza.quantity }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% empty %}
+            <li>You have no orders yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
